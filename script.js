@@ -19,7 +19,7 @@ function divide() {
 function welcomeMessage() {
   alert("Welcome to the site!");
 }
-
+// In-Class Exercise 2: Math Functions 
 // Calculates the total cost of a meal including tax and tip
 let cost = 0;
 let soup = 10;
@@ -35,12 +35,16 @@ let tax=1.07825
 
 cost2 = toaster + shirt + shirt;
 cost2=cost2*tax;
+function calcTax(){
+  alert("The total cost with tax is: $" + cost2.toFixed(2) + ". Check JS for items and prices");
+}
 // Calculates the area of a circle given the radius
 let result = 0
-function circleArea(radius){
-  return (Math.pow(radius,2))*Math.PI;
+function circleArea(){
+  alert ("The Area is: " + (Math.pow(document.getElementById('inputRadius').value,2)*Math.PI));
 }
 // Generates a random password between 8 and 100 characters long
+// Made with Copilot
 function password() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
   const length = Math.floor(Math.random() * (100 - 8 + 1)) + 8;
@@ -49,7 +53,7 @@ function password() {
     const randomIndex = Math.floor(Math.random() * chars.length);
     result += chars[randomIndex];
   }
-  return result;
+  alert("Your new generated password is: " + result);
 }
 // It is important to use functions for better reactive response and less hard-coding. 
 // They are especially useful because of how reusable they are. They can do repetitive tasks

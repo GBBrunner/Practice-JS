@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEST JS</title>
     <script src="script.js" defer> </script>
+    <style>
+        .exercise {
+            width: 36rem;
+        }
+        #exercise1 {
+            background-color: lightblue;
+        }
+        #exercise2 {
+            background-color: lightcoral;
+        }
+    </style>
 </head>
 <body>
-    <div style="background-color: lightblue; width:fit-content">
+    <div class="exercise" id ="exercise1">
         <h1>In-Class Exercise 1: Helper Functions </h1>
         <div id="myDiv">You won't be able to see this because the JS is changing the contents of this div</div>
         <p class="noCall">This will not be changed because it is not called anywhere in the JS</p>
@@ -17,6 +28,13 @@
         <button onclick="multiply()"> Multiply </button>
         <button onclick="divide()"> Divide </button>
     
+    </div>
+    <div class="exercise" id ="exercise2">
+        <h1>In-Class Exercise 2: Math Functions</h1>
+        <input type="number" placeholder="Enter Radius" id="inputRadius">
+        <button onclick="circleArea()"> Calculate Circle Area </button>
+        <button onclick="password()"> Generate Password </button>
+        <button onclick="calcTax()"> Calculate Tax </button>
     </div>
 </body>
 
