@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+.exercise {
+    width: 36rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px dashed black;
+}
+#exercise1 {
+    background-color: lightblue;
+}
+#exercise2 {
+    background-color: lightcoral;
+}
+#exercise3 {
+    background-color: lightgreen;
+}#exercise4 {
+    background-color: lightgoldenrodyellow;
+}
+#exercise5 {
+    background-color: lightpink;
+}
+#exercise6 {
+    background-color: lightgray;
+}
+#exercise7 {
+    background-color: lightcyan;
+}
+#exercise8 {
+    background-color: lightseagreen;
+}

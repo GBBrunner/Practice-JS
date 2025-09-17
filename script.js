@@ -60,6 +60,9 @@ function password() {
 // or specific task. Using them right can save you hundreds lines in the right scenario, especially
 // for tasks that repeat a bunch of the same elements.
 // Conditionals
+
+// In-Class Exercise 3: Movie Ticket Eligibility 
+
 let age = 20;
 // If age is less than or equal to 18 or greater than or equal to 65
 // Otherwise, print "You are not eligible for a discount."
@@ -78,6 +81,7 @@ function getDashboardMessage(role) {
       // Break kills the switch statement and stops it from running the next cases
       // This is for a more efficient code
       break; 
+    
     case "user":
       message = "Welcome User! You have limited access.";
       break;
@@ -86,3 +90,67 @@ function getDashboardMessage(role) {
   }
   return message;
 }
+function getUsername(user){
+  let name = user;
+}
+
+
+
+// //Arrays and Loops
+// const array = [1, 2, 3, 4, 5];
+// const arraySquared = array.map(x => x ** 2);
+// const arraySquaredAlt = [];
+// array.forEach(num => arraySquaredAlt.push(num ** 2));
+//   // const arraySquaredAlt = [];
+//   // for (let i = 0; i < array.length; i++) {
+//   //   arraySquaredAlt.push(array[i] ** 2);
+//   // }
+
+// console.log(arraySquared); // Output: [1, 4, 9, 16, 25]
+// console.log(arraySquaredAlt); // Output: [1, 4, 9, 16, 25]
+
+
+// Palindrome Checker
+
+function isPalindrome(str) {
+  const universal = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return universal === universal.split('').reverse().join('');
+}
+// Using a loop, write a function that adds all the values in an array
+const values = [121, -111, 123, 23, 10, -101, 30];
+function addArrayValues(){
+  let sum = 0;
+  for (let i = 0; i < values.length; i++) {
+    sum += values[i];
+  }
+  return sum;
+}
+// array.reduce() method executes a reducer function on each element of the array, resulting in a single output value.
+// array.forEach() method executes a provided function once for each array element.
+function addArrayValuesAlt(){
+  return values.reduce((acc, val) => acc + val, 0);
+}
+function addArrayValuesAlt2(){
+  let sum = 0;
+  values.forEach(index => {
+    sum += values[index];
+  });
+  return sum;
+}
+// Objects
+const car = {
+  make: 'Toyota',
+  model: 'Camry',
+  year: 2020,
+  color: 'blue',
+  mileage: 15000,
+  engine:{
+    cylinders: 4,
+  },
+  getCylinders: function() {
+    return this.engine.cylinders;
+  }
+};
+// Accessing object properties
+console.log(car.make); // Output: Toyota
+car.getCylinders(); // Output: 4
