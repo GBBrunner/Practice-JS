@@ -99,7 +99,10 @@ function getUsername(user){
 // If the number is divisible by 5, print "Buzz".
 // If the number is divisible by both 3 and 5, print "FizzBuzz".
 // Otherwise, print the number itself.
-function fizzBuzz() {
+function fizzBuzzInput(){
+  fizzBuzz(1)
+}
+function fizzBuzz(repeats) {
   // Set the value of fizzNum to the given input value
   const fizzNum = document.getElementById('fizzBuzzInput').value;
   // Check if the input is a valid number
