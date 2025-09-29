@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST JS</title>
-    <script src="script.js" defer> </script>
+    <title>JS In-class Exercises</title>
+    <script src="scripts/script.js" type="module"> </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="exercise" id ="exercise1">
+    <div class="exercise ex1">
         <h1>In-Class Exercise 1: Helper Functions </h1>
         <div id="myDiv">You won't be able to see this because the JS is changing the contents of this div</div>
         <p class="noCall">This will not be changed because it is not called anywhere in the JS</p>
@@ -19,24 +19,30 @@
         <button onclick="divide()"> Divide </button>
     
     </div>
-    <div class="exercise" id ="exercise2">
+    <div class="exercise ex2">
         <h1>In-Class Exercise 2: Math Functions</h1>
         <input type="number" placeholder="Enter Radius" id="inputRadius">
         <button onclick="circleArea()"> Calculate Circle Area </button>
         <button onclick="password()"> Generate Password </button>
         <button onclick="calcTax()"> Calculate Tax </button>
     </div>
-    <div class="exercise" id ="exercise3">
+    <div class="exercise ex3">
         <h1>In-Class Exercise 3: Movie Ticket Eligibility </h1>
         <span>Age: 20 -- </span>
         <span>Student Status: True</span>
         <button onclick="checkDiscount()"> Check Discount Eligibility </button>
     </div>
-    <div class="exercise" id ="exercise4">
+    <div class="exercise ex4">
         <h1>In-Class Exercise 4: Fizz Buzz </h1>
         <input type="number" placeholder="Enter a number" id="fizzBuzzInput">
         <button onclick="fizzBuzz()">Calculate FizzBuzz On Specific Number</button>
     </div>
+
+    <div class="exercise ex5" id="app-container">
+        <div class="controls">
+            <button id="prev-button">Previous</button>
+            <button id="next-button">Next</button>
+        </div>
 
 </body>
 

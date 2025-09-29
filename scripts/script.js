@@ -1,3 +1,4 @@
+import {pokedex} from './pokémonAPI.js';
 // Changes HTML content
 document.getElementById('myDiv').innerHTML = '<span>Hello World! This <span style="color:red; font-weight:700;">was</span> changed by the JS!"</span>'
 
@@ -33,7 +34,7 @@ let toaster = 18.50
 let shirt = 7.5
 let tax=1.07825
 
-cost2 = toaster + shirt + shirt;
+let cost2 = toaster + shirt + shirt;
 cost2=cost2*tax;
 function calcTax(){
   alert("The total cost with tax is: $" + cost2.toFixed(2) + ". Check JS for items and prices");
@@ -104,10 +105,7 @@ function getUsername(user){
 // If the number is divisible by 5, print "Buzz".
 // If the number is divisible by both 3 and 5, print "FizzBuzz".
 // Otherwise, print the number itself.
-function fizzBuzzInput(){
-  fizzBuzz(1)
-}
-function fizzBuzz(repeats) {
+function fizzBuzz() {
   // Set the value of fizzNum to the given input value
   const fizzNum = document.getElementById('fizzBuzzInput').value;
   // Check if the input is a valid number
@@ -138,7 +136,6 @@ function fizzBuzz(repeats) {
     alert(`${fizzNum} is not between 0 and 100`);
   }
 }
-
 
 // //Arrays and Loops
 // const array = [1, 2, 3, 4, 5];
@@ -198,3 +195,5 @@ const car = {
 // Accessing object properties
 console.log(car.make); // Output: Toyota
 car.getCylinders(); // Output: 4
+// Exercise 5: Pokemon API imported from pokémonAPI.js
+pokedex();
