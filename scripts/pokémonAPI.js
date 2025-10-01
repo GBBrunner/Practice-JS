@@ -4,7 +4,7 @@ function pokedex() {
     const MAX_ID = 1025;
     const API_URL = "https://pokeapi.co/api/v2/pokemon/";
 
-    const app = document.getElementById("app-container"); 
+    const app = document.getElementById("Pokémon_API"); 
     let cardContent, prevButton, nextButton;
 
     const capitalize = str => str[0].toUpperCase() + str.slice(1);

@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS In-class Exercises</title>
+    <base href=".">
     <script src="scripts/script.js" type="module"> </script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,37 +14,50 @@
         <h1>In-Class Exercise 1: Helper Functions </h1>
         <div id="myDiv">You won't be able to see this because the JS is changing the contents of this div</div>
         <p class="noCall">This will not be changed because it is not called anywhere in the JS</p>
-         <button onclick="welcomeMessage()"> Welcome Message </button>
+         <button id="welcomeMessage"> Welcome Message </button>
         <input type="number" placeholder="Enter Value A" id="inputValueA">
         <input type="number" placeholder="Enter Value B" id="inputValueB">
-        <button onclick="multiply()"> Multiply </button>
-        <button onclick="divide()"> Divide </button>
-    
+        <button id="multiply-button"> Multiply </button>
+        <button id="divide-button"> Divide </button>
+
     </div>
     <div class="exercise ex2">
         <h1>In-Class Exercise 2: Math Functions</h1>
         <input type="number" placeholder="Enter Radius" id="inputRadius">
-        <button onclick="circleArea()"> Calculate Circle Area </button>
-        <button onclick="password()"> Generate Password </button>
-        <button onclick="calcTax()"> Calculate Tax </button>
+        <button id="calculate-circle-area-button"> Calculate Circle Area </button>
+        <button id="generate-password-button"> Generate Password </button>
+        <button id="calculate-tax-button"> Calculate Tax </button>
     </div>
     <div class="exercise ex3">
         <h1>In-Class Exercise 3: Movie Ticket Eligibility </h1>
         <span>Age: 20 -- </span>
         <span>Student Status: True</span>
-        <button onclick="checkDiscount()"> Check Discount Eligibility </button>
+        <button id="checkDiscount-button"> Check Discount Eligibility </button>
     </div>
     <div class="exercise ex4">
         <h1>In-Class Exercise 4: Fizz Buzz </h1>
         <input type="number" placeholder="Enter a number" id="fizzBuzzInput">
-        <button onclick="fizzBuzz()">Calculate FizzBuzz On Specific Number</button>
+        <button id="fizzBuzz-button">Calculate FizzBuzz On Specific Number</button>
     </div>
 
-    <div class="exercise ex5" id="app-container">
+    <div class="exercise ex5" id="Pokémon_API">
         <div class="controls">
             <button id="prev-button">Previous</button>
             <button id="next-button">Next</button>
         </div>
+    </div>
+
+    <div class="exercise ex6">
+        <h1>In-Class Exercise 6: Music Player Controls </h1>
+        <p>Now playing: <span id="current-track">Track Title</span></p>
+        <div>
+            <button class="music-control-button fa-solid fa-backward" id="prev-button"></button>
+            <button class="music-control-button fa-solid fa-play" id="play-button"></button>
+            <button class="music-control-button fa-solid fa-stop" id="stop-button"></button>
+            <button class="music-control-button fa-solid fa-forward" id="next-button"></button>
+        </div>
+        
+    </div>
 
 </body>
 
