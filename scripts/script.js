@@ -37,7 +37,6 @@ document.getElementById('fizzBuzz-button').addEventListener('click', fizzBuzz);
 
 // Exercise 6: Music Player Controls, imported from musicPlayer.js
 document.getElementById('next-button').addEventListener('click', next);
-document.getElementById('play-button').addEventListener('click', play);
-document.getElementById('stop-button').addEventListener('click', stop);
+// Play/stop toggle handled in music_player_controls.js
 document.getElementById('prev-button').addEventListener('click', previous);
 

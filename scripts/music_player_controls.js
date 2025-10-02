@@ -15,7 +15,6 @@ class Node{
 const musicList = new DoublyLinkedList();
 const current_track = document.getElementById('current-track');
 const play_button = document.getElementById('play-button');
-const stop_button = document.getElementById('stop-button');
 current_track.innerText = "No song is currently playing.";
 function addMusic(data){
     const newNode = new Node(data);
@@ -33,20 +32,27 @@ function addMusic(data){
 function play(){
     if(musicList.current){
         play_button.classList.replace("fa-play", "fa-pause");
-        play_button.id = "stop-button";
+        play_button.innerText = ""; // Remove text if any
+        play_button.title = "Stop";
+        play_button.dataset.state = "playing";
+        current_track.innerText = musicList.current.data;
         console.log(`Playing: ${musicList.current.data}`);
     }
 }
-addMusic("Song 1");
-addMusic("Song 2");
-addMusic("Song 3");
-addMusic("Song 4");
-addMusic("Song 5");
+// Load music list from JSON file
+fetch('scripts/musiclist.json')
+    .then(response => response.json())
+    .then(songs => {
+        songs.forEach(song => addMusic(song));
+    })
+    .catch(err => console.error('Failed to load music list:', err));
 function stop(){
-
     if(musicList.current){
-        stop_button.classList.replace("fa-pause", "fa-play");
-        stop_button.id = "play-button";
+        play_button.classList.replace("fa-pause", "fa-play");
+        play_button.innerText = "";
+        play_button.title = "Play";
+        play_button.dataset.state = "stopped";
+        current_track.innerText = "No song is currently playing.";
         console.log(`Stopped: ${musicList.current.data}`);
     } else{
         console.log("No song is currently playing.");
@@ -70,5 +76,17 @@ function previous(){
     }
     current_track.innerText = musicList.current.data;
     play();
+}
+
+// Toggle play/stop on button click
+if (play_button) {
+    play_button.dataset.state = "stopped";
+    play_button.addEventListener('click', function() {
+        if (play_button.dataset.state === "stopped") {
+            play();
+        } else {
+            stop();
+        }
+    });
 }
 export {play, stop, next, previous, musicList};
