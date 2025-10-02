@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BST Visualization</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;background:#0f172a;color:#e6eef8}
+    header{padding:16px 24px;background:linear-gradient(90deg,#0b1220,#0f1b2a);box-shadow:0 2px 12px rgba(0,0,0,.6)}
+    header h1{margin:0;font-size:18px}
+    main{padding:18px;display:grid;grid-template-columns:320px 1fr;gap:18px}
+    .panel{background:#071020;padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,.6)}
+    .controls input[type=number]{width:100%;padding:8px;margin-bottom:8px;border-radius:6px;border:1px solid #223343;background:#08121b;color:#e6eef8}
+    .controls button{width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:0;background:#0ea5a9;color:#021018;font-weight:600;cursor:pointer}
+    .controls button.secondary{background:#334155}
+    .legend{font-size:13px;color:#9fb3c6}
+    /* SVG area */
+    .canvasWrap{background:linear-gradient(180deg,#061022,#07182a);border-radius:10px;padding:12px;min-height:520px;overflow:auto}
+    svg{width:100%;height:600px;display:block}
+    .node{cursor:default}
+    .node circle{fill:#0369a1;stroke:#083344;stroke-width:2}
+    .node text{fill:#e6f6fb;font-weight:700;font-size:12px;text-anchor:middle}
+    .edge{stroke:#48b0bf;stroke-width:2;opacity:.85}
+    footer{padding:12px 24px;font-size:13px;color:#9fb3c6}
+    @media (max-width:880px){main{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Binary Search Tree — Visualization</h1>
+  </header>
+  <main>
+    <div class="panel">
+      <div style="margin-bottom:10px">
+        <strong>Initial values (object)</strong>
+        <div class="legend" id="valuesList"></div>
+      </div>
+      <div class="controls">
+        <input id="valueInput" type="number" placeholder="Enter value (number)" />
+        <button id="insertBtn">Insert value</button>
+        <button id="removeBtn" class="secondary">Remove value</button>
+        <button id="randomBtn">Insert random 1-99</button>
+        <button id="resetBtn" class="secondary">Reset to initial</button>
+      </div>
+      <div style="margin-top:12px">
+        <strong>Traversals</strong>
+        <div class="legend">In-order: <span id="inorder"></span></div>
+        <div class="legend">Pre-order: <span id="preorder"></span></div>
+        <div class="legend">Post-order: <span id="postorder"></span></div>
+      </div>
+    </div>
+
+    <div class="canvasWrap panel">
+      <svg id="svgCanvas" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </main>
+  <footer>Tip: open the dev console to see debug logs. Values are treated as numbers; duplicates are ignored.</footer>
+
+  <script>
+    // --- BST implementation (classes) ---
+    class Node {
+      constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    class BinarySearchTree {
+      constructor() {
+        this.root = null;
+      }
+
+      insert(value) {
+        value = Number(value);
+        const newNode = new Node(value);
+        if (this.root === null) {
+          this.root = newNode;
+          return true;
+        }
+        let current = this.root;
+        while (true) {
+          if (value === current.value) return false; // no duplicates
+          if (value < current.value) {
+            if (current.left === null) {
+              current.left = newNode;
+              return true;
+            }
+            current = current.left;
+          } else {
+            if (current.right === null) {
+              current.right = newNode;
+              return true;
+            }
+            current = current.right;
+          }
+        }
+      }
+
+      remove(value) {
+        value = Number(value);
+        this.root = this._removeNode(this.root, value);
+      }
+
+      _removeNode(node, value) {
+        if (!node) return null;
+        if (value < node.value) {
+          node.left = this._removeNode(node.left, value);
+          return node;
+        } else if (value > node.value) {
+          node.right = this._removeNode(node.right, value);
+          return node;
+        } else {
+          // found node
+          // no children
+          if (!node.left && !node.right) return null;
+          // one child
+          if (!node.left) return node.right;
+          if (!node.right) return node.left;
+          // two children: find min in right subtree
+          let min = node.right;
+          while (min.left) min = min.left;
+          node.value = min.value;
+          node.right = this._removeNode(node.right, min.value);
+          return node;
+        }
+      }
+
+      find(value) {
+        value = Number(value);
+        let current = this.root;
+        while (current) {
+          if (value === current.value) return true;
+          current = value < current.value ? current.left : current.right;
+        }
+        return false;
+      }
+
+      // Traversals
+      inOrder(node = this.root, arr = []) {
+        if (!node) return arr;
+        this.inOrder(node.left, arr);
+        arr.push(node.value);
+        this.inOrder(node.right, arr);
+        return arr;
+      }
+      preOrder(node = this.root, arr = []) {
+        if (!node) return arr;
+        arr.push(node.value);
+        this.preOrder(node.left, arr);
+        this.preOrder(node.right, arr);
+        return arr;
+      }
+      postOrder(node = this.root, arr = []) {
+        if (!node) return arr;
+        this.postOrder(node.left, arr);
+        this.postOrder(node.right, arr);
+        arr.push(node.value);
+        return arr;
+      }
+    }
+
+    // --- Initial object with 10 values ---
+    const valuesObjInitial = {
+      a: 50,
+      b: 30,
+      c: 70,
+      d: 20,
+      e: 40,
+      f: 60,
+      g: 80,
+      h: 10,
+      i: 35,
+      j: 65
+    };
+
+    // Provide working copy
+    let valuesObj = Object.assign({}, valuesObjInitial);
+
+    const bst = new BinarySearchTree();
+
+    function buildFromObject(obj) {
+      bst.root = null;
+      Object.keys(obj).forEach(k => bst.insert(obj[k]));
+    }
+
+    // --- Layout calculation for SVG drawing ---
+    function computeNodePositions() {
+      // assign x positions by in-order index
+      const positions = new Map();
+      let xIndex = 0;
+
+      function inorderAssign(node, depth = 0) {
+        if (!node) return;
+        inorderAssign(node.left, depth + 1);
+        positions.set(node, { xIndex: xIndex++, depth });
+        inorderAssign(node.right, depth + 1);
+      }
+
+      inorderAssign(bst.root, 0);
+
+      // convert index to coordinates
+      const width = 1100; // view width area for nodes
+      const heightStep = 80;
+      const gap = Math.max(40, Math.floor(width / (xIndex + 1)));
+
+      const coords = new Map();
+      positions.forEach((v, node) => {
+        const x = 50 + v.xIndex * gap + (gap / 2);
+        const y = 40 + v.depth * heightStep;
+        coords.set(node, { x, y });
+      });
+      return coords;
+    }
+
+    function renderTree() {
+      const svg = document.getElementById('svgCanvas');
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+      if (!bst.root) return;
+
+      const coords = computeNodePositions();
+
+      // draw edges (lines)
+      coords.forEach((pos, node) => {
+        if (node.left && coords.has(node.left)) {
+          const c = coords.get(node.left);
+          const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1', pos.x);
+          line.setAttribute('y1', pos.y + 18);
+          line.setAttribute('x2', c.x);
+          line.setAttribute('y2', c.y - 18);
+          line.setAttribute('class','edge');
+          svg.appendChild(line);
+        }
+        if (node.right && coords.has(node.right)) {
+          const c = coords.get(node.right);
+          const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+          line.setAttribute('x1', pos.x);
+          line.setAttribute('y1', pos.y + 18);
+          line.setAttribute('x2', c.x);
+          line.setAttribute('y2', c.y - 18);
+          line.setAttribute('class','edge');
+          svg.appendChild(line);
+        }
+      });
+
+      // draw nodes
+      coords.forEach((pos, node) => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+        g.setAttribute('class','node');
+        g.setAttribute('transform', `translate(${pos.x}, ${pos.y})`);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        circle.setAttribute('r', 18);
+        g.appendChild(circle);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+        text.setAttribute('dy', '4');
+        text.textContent = node.value;
+        g.appendChild(text);
+
+        svg.appendChild(g);
+      });
+
+      // update traversals text
+      document.getElementById('inorder').textContent = bst.inOrder().join(', ');
+      document.getElementById('preorder').textContent = bst.preOrder().join(', ');
+      document.getElementById('postorder').textContent = bst.postOrder().join(', ');
+
+      // update values list in panel
+      const vals = Object.entries(valuesObj).map(([k,v])=> `${k}: ${v}`).join(', ');
+      document.getElementById('valuesList').textContent = vals;
+    }
+
+    // --- Controls ---
+    document.getElementById('insertBtn').addEventListener('click', () => {
+      const v = Number(document.getElementById('valueInput').value);
+      if (Number.isNaN(v)) return alert('Please enter a number');
+      const ok = bst.insert(v);
+      if (!ok) alert('Value already exists (duplicates ignored)');
+      else {
+        // add to valuesObj with generated key
+        const key = generateKeyForValue(v);
+        valuesObj[key] = v;
+      }
+      renderTree();
+    });
+
+    document.getElementById('randomBtn').addEventListener('click', ()=>{
+      const v = Math.floor(Math.random()*98)+1;
+      const ok = bst.insert(v);
+      if (!ok) { alert('Random value duplicate — try again'); return; }
+      valuesObj[generateKeyForValue(v)] = v;
+      renderTree();
+    });
+
+    document.getElementById('removeBtn').addEventListener('click', ()=>{
+      const v = Number(document.getElementById('valueInput').value);
+      if (Number.isNaN(v)) return alert('Please enter a number to remove');
+      if (!bst.find(v)) return alert('Value not found');
+      bst.remove(v);
+      // remove from valuesObj (first matching key)
+      for (const k of Object.keys(valuesObj)){
+        if (valuesObj[k] === v) { delete valuesObj[k]; break; }
+      }
+      renderTree();
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', ()=>{
+      valuesObj = Object.assign({}, valuesObjInitial);
+      buildFromObject(valuesObj);
+      renderTree();
+    });
+
+    function generateKeyForValue(v){
+      // create short unique key like x1, x2... (avoid collisions with existing keys)
+      let i = 1;
+      while (valuesObj[`x${i}`] !== undefined) i++;
+      return `x${i}`;
+    }
+
+    // --- Initialize ---
+    buildFromObject(valuesObj);
+    renderTree();
+
+    // make svg responsive height based on content (simple)
+    window.addEventListener('resize', ()=>{ renderTree(); });
+  </script>
+</body>
+</html>
