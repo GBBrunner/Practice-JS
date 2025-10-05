@@ -40,7 +40,7 @@ function play(){
     }
 }
 // Load music list from JSON file
-fetch('scripts/musiclist.json')
+fetch('scripts/JSON/musiclist.json')
     .then(response => response.json())
     .then(songs => {
         songs.forEach(song => addMusic(song));

@@ -10,9 +10,8 @@ import { fizzBuzz } from './fizzbuzz.js';
 import {pokedex} from './pokémonAPI.js';
 // In-Class Exercise 6: Music Player Controls
 import {play, stop, next, previous, musicList} from './music_player_controls.js';
-// In-Class Exercise 3: Movie Ticket Eligibility 
-
-
+// In-Class Exercise 7: Searching Algorithms
+import {linearSearch, binarySearch, jumpSearch, strArr} from './searchingAlgorithms.js';
 
 // Exercise 5: Pokemon API imported from pokémonAPI.js
 pokedex();
@@ -40,3 +39,7 @@ document.getElementById('next-button').addEventListener('click', next);
 // Play/stop toggle handled in music_player_controls.js
 document.getElementById('prev-button').addEventListener('click', previous);
 
+// Exercise 7: Searching Algorithms, imported from searchingAlgorithms.js
+document.getElementById('linear-search-button').addEventListener('click', linearSearch(strArr, document.getElementById('linearSearchInput').value));
+document.getElementById('binary-search-button').addEventListener('click', binarySearch(strArr, document.getElementById('binarySearchInput').value));
+document.getElementById('jump-search-button').addEventListener('click', jumpSearch(strArr, document.getElementById('jumpSearchInput').value));    
