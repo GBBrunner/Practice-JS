@@ -40,6 +40,27 @@ document.getElementById('next-button').addEventListener('click', next);
 document.getElementById('prev-button').addEventListener('click', previous);
 
 // Exercise 7: Searching Algorithms, imported from searchingAlgorithms.js
-document.getElementById('linear-search-button').addEventListener('click', linearSearch(strArr, document.getElementById('linearSearchInput').value));
-document.getElementById('binary-search-button').addEventListener('click', binarySearch(strArr, document.getElementById('binarySearchInput').value));
-document.getElementById('jump-search-button').addEventListener('click', jumpSearch(strArr, document.getElementById('jumpSearchInput').value));    
+// Wire up buttons to read the input, run the respective search, and alert results.
+document.getElementById('linearSearchButton').addEventListener('click', () => {
+	const value = document.getElementById('linearSearchInput').value.trim();
+	if (!value) { alert('Please enter a value to search.'); return; }
+	const currentIndex = linearSearch(strArr, value.toLowerCase());
+	if (currentIndex !== -1) alert(`${value} found at index ${currentIndex}`);
+	else alert(`${value} not found. Please check your spelling and try again.`);
+});
+
+document.getElementById('binarySearchButton').addEventListener('click', () => {
+	const value = document.getElementById('binarySearchInput').value.trim();
+	if (!value) { alert('Please enter a value to search.'); return; }
+	const currentIndex = binarySearch(strArr, value);
+	if (currentIndex !== -1) alert(`${value} found at index ${currentIndex}`);
+	else alert(`${value} not found. Please check your spelling and try again.`);
+});
+
+document.getElementById('jumpSearchButton').addEventListener('click', () => {
+	const value = document.getElementById('jumpSearchInput').value.trim();
+	if (!value) { alert('Please enter a value to search.'); return; }
+	const currentIndex = jumpSearch(strArr, value);
+	if (currentIndex !== -1) alert(`${value} found at index ${currentIndex}`);
+	else alert(`${value} not found. Please check your spelling and try again.`);
+});
