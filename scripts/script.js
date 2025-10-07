@@ -22,17 +22,41 @@ pokedex();
 
 
 // Exercise 1: Helper Functions, imported from helperFunctions.js
-document.getElementById('multiply-button').addEventListener('click', multiply);
-document.getElementById('divide-button').addEventListener('click', divide);
-document.getElementById('welcomeMessage').addEventListener('click', welcomeMessage);
+document.getElementById('multiply-button').addEventListener('click', () => {
+	const a = document.getElementById('inputValueA').value;
+	const b = document.getElementById('inputValueB').value;
+	alert(`${a} x ${b} = ${multiply(a,b)}`);
+});
+document.getElementById('divide-button').addEventListener('click', () => {
+	const a = document.getElementById('inputValueA').value;
+	const b = document.getElementById('inputValueB').value;
+	alert(`${a} / ${b} = ${divide(a,b)}`);
+});
+document.getElementById('welcomeMessage').addEventListener('click', () => {
+	alert(welcomeMessage());
+});
 // Exercise 2: Math Functions, imported from mathFunctions.js
-document.getElementById('calculate-circle-area-button').addEventListener('click', circleArea);
-document.getElementById('generate-password-button').addEventListener('click', password);
-document.getElementById('calculate-tax-button').addEventListener('click', calcTax);
+document.getElementById('calculate-circle-area-button').addEventListener('click', () => {
+	const r = document.getElementById('inputRadius').value;
+	const area = circleArea(r);
+	alert(`The Area is: ${area}`);
+});
+document.getElementById('generate-password-button').addEventListener('click', () => {
+	alert(`Your new generated password is: ${password()}`);
+});
+document.getElementById('calculate-tax-button').addEventListener('click', () => {
+	alert(`The total cost with tax is: $${calcTax()}. Check JS for items and prices`);
+});
 // Exercise 3: Movie Ticket Eligibility, imported from movieTicket.js
-document.getElementById('checkDiscount-button').addEventListener('click', checkDiscount);
+document.getElementById('checkDiscount-button').addEventListener('click', () => {
+	alert(checkDiscount());
+});
 // Exercise 4: FizzBuzz, imported from fizzBuzz.js
-document.getElementById('fizzBuzz-button').addEventListener('click', fizzBuzz);
+document.getElementById('fizzBuzz-button').addEventListener('click', () => {
+	const n = document.getElementById('fizzBuzzInput').value;
+	const res = fizzBuzz(n);
+	alert(res.message);
+});
 
 // Exercise 6: Music Player Controls, imported from musicPlayer.js
 document.getElementById('next-button').addEventListener('click', next);

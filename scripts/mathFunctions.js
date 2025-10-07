@@ -16,12 +16,12 @@ let tax=1.07825
 let cost2 = toaster + shirt + shirt;
 cost2=cost2*tax;
 function calcTax(){
-  alert("The total cost with tax is: $" + cost2.toFixed(2) + ". Check JS for items and prices");
+  return Number(cost2.toFixed(2));
 }
 // Calculates the area of a circle given the radius
 let result = 0
-function circleArea(){
-  alert ("The Area is: " + (Math.pow(document.getElementById('inputRadius').value,2)*Math.PI));
+function circleArea(radius){
+  return Math.pow(Number(radius),2)*Math.PI;
 }
 // Generates a random password between 8 and 100 characters long
 function password() {
@@ -32,7 +32,7 @@ function password() {
     const randomIndex = Math.floor(Math.random() * chars.length);
     result += chars[randomIndex];
   }
-  alert("Your new generated password is: " + result);
+  return result;
 }
 export { circleArea, password, calcTax };
 // It is important to use functions for better reactive response and less hard-coding. 

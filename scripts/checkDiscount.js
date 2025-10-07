@@ -5,11 +5,9 @@ let isStudent = true;
 // Otherwise, print "You are not eligible for a discount."
 // If and else statements are for true or false statements
 if (age <= 18 || age >= 65 || isStudent==true) {
-  console.log("You are elligible for a discount.");
-  alert("You are elligible for a discount.");
+  return "You are elligible for a discount.";
 } else {
-  console.log("You are not elligible for a discount, Regular ticket only.");
-  alert("You are not elligible for a discount, Regular ticket only.");
+  return "You are not elligible for a discount, Regular ticket only.";
 }
 }
 export { checkDiscount };

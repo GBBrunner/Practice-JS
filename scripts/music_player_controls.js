@@ -36,7 +36,7 @@ function play(){
         play_button.title = "Stop";
         play_button.dataset.state = "playing";
         current_track.innerText = musicList.current.data;
-        console.log(`Playing: ${musicList.current.data}`);
+        // centralized UI can log this event
     }
 }
 // Load music list from JSON file
@@ -45,7 +45,7 @@ fetch('scripts/JSON/musiclist.json')
     .then(songs => {
         songs.forEach(song => addMusic(song));
     })
-    .catch(err => console.error('Failed to load music list:', err));
+    .catch(err => { /* centralized UI can log this error */ });
 function stop(){
     if(musicList.current){
         play_button.classList.replace("fa-pause", "fa-play");
@@ -53,9 +53,9 @@ function stop(){
         play_button.title = "Play";
         play_button.dataset.state = "stopped";
         current_track.innerText = "No song is currently playing.";
-        console.log(`Stopped: ${musicList.current.data}`);
+        // centralized UI can log this event
     } else{
-        console.log("No song is currently playing.");
+        // centralized UI can log this event
     }
 }
 function next(){
